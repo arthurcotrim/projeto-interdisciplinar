@@ -55,6 +55,6 @@ O projeto segue uma arquitetura clara e organizada:
 
 Este projeto é distribuído sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
 
-## Contribuições
+## 🤝 Contribuições
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e enviar pull requests para melhorias ou novas funcionalidades.
