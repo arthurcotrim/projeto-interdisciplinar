@@ -1,0 +1,55 @@
+﻿@model Gerenciamento.Models.PersonViewModel
+@{
+    ViewData["Title"] = "Registrar Cadastro";
+}
+
+<div class="row justify-content-center">
+    <div class="col-12 d-none" id="validation-container-parent">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <div role="alert" class="fade bg-danger text-white alert alert-dismissible show" id="validation-container">
+                    @Html.ValidationSummary(true, "", new { @class = "text-white" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card border-0">
+            <div class="pt-4 pb-4 text-center card-header card-header-signup">
+                <a class=""
+                   href="//">
+                    <span>
+
+                    </span>
+                </a>
+            </div>
+            <div class="p-4 card-body">
+                <div class="text-center w-75 m-auto">
+                    <h4 class="text-dark-50 text-center mt-0 fw-bold">Registrar cliente</h4>
+                    <p class="text-muted mb-4">Preencha os dados abaixo para criar um novo registro.</p>
+                </div>
+                <form asp-action="Registrar" method="post">
+                    <div class="mb-3 col-12">
+                        <label for="Name" class="form-label">Nome <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="Name" name="Name" required>
+                    </div>
+                    <div class="mb-3 col-12">
+                        <label for="Phone" class="form-label">Telefone <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control sp_celphones" id="Phone" name="Phone" required>
+                    </div>
+                    <div class="mb-3 col-12">
+                        <label for="CPF" class="form-label ">CPF <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control cpf" id="CPF" name="CPF" required>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-success d-flex align-items-center mt-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @@fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" /></svg>
+                            <span class="ms-1">Registrar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

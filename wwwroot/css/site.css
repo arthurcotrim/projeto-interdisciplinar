@@ -1,0 +1,100 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #F3F5F8;
+}
+
+.card {
+    box-shadow: 0px 0px 35px 0px rgba(154, 161, 171, .15);
+}
+
+.btn-success {
+    background-color: #3DF89D;
+    border-color: #3DF89D;
+    color: #000;
+}
+
+    .btn-success:hover {
+        background-color: #09bf8c;
+        border-color: #09bf8c;
+    }
+
+.btn-danger {
+    background-color: #fa5c7c;
+    border-color: #fa5c7c;
+    color: #fff;
+}
+
+    .btn-danger:hover {
+        background-color: #e75573;
+        border-color: #e75573;
+    }
+
+
+.card-header-signup {
+    background-color: #3DF89D;
+    border-color: #3DF89D;
+}
+
+    .card-header-signup a {
+        text-decoration: none;
+    }
+
+table td a{
+    text-decoration: none;
+    color: #000
+}
+
+.text-bg-success {
+    background-color: #3DF89D;
+    color: #000;
+}
+
+.text-bg-danger {
+    background-color: #fa5c7c;
+    color: #fff;
+}
+
+.card-header-signup a {
+    text-decoration: none;
+}
+
+.list-group-item{
+    cursor: pointer;
+}
+
+    .list-group-item:hover {
+        background-color: #09bf8c;
+        border-color: #09bf8c;
+    }
+
+    .list-group-item.active {
+        background-color: #3DF89D;
+        border-color: #3DF89D;
+        color: #000;
+    }
+
+#validation-container ul{
+    list-style: none !important;
+    margin: 0 !important
+}
+
+.validation-container ul{
+    list-style: none !important;
+    margin: 0 !important
+}
+

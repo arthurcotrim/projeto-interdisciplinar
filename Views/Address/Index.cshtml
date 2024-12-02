@@ -1,0 +1,98 @@
+﻿@model Gerenciamento.Models.DataOneAddressViewModel
+@{
+    ViewData["Title"] = "Editar Endereço";
+}
+
+<div class="row">
+    <div class="col-12 my-3">
+        <h4>Atualizar Endereço</h4>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            @if (Model != null)
+            {
+                <div class="col-12 col-md-4">
+                    <div class="text-center card h-100">
+                        <div class="card-body d-flex align-items-center justify-content-center flex-column py-4">
+                            <h4>Olá, @Model.Name</h4>
+
+                            <ul class="mt-3 list-group list-group-flush w-100 text-start" id="list-sidebar">
+                                <li class="list-group-item rounded mb-2 border-0">
+                                    <p class="mb-0">
+                                        <a class="text-decoration-none text-dark  d-block" href="/Home/Dados/@Model.PersonId">Meus Endereços</a>
+                                    </p>
+                                </li>
+                                <li class="list-group-item rounded mb-2 border-0">
+                                    <p class="mb-0">
+                                        <a class="text-decoration-none text-dark  d-block" href="/Person/Index/@Model.PersonId">Atualizar Dados</a>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-8">
+                    <div class="text-center card">
+                        <div class="card-body">
+                            <div class="row" id="atualizar-dados-container">
+                                <div class="col-12 d-none" id="validation-container-parent">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12">
+                                            <div role="alert" class="fade bg-danger text-white alert alert-dismissible show validation-container" id="validation-container">
+                                                @Html.ValidationSummary(true, "", new { @class = "text-white" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if(Model.AddressViewModel != null){
+                                    <form asp-action="Index" method="post" class="text-start">
+                                        <input type="text" hidden value="@Model.PersonId" id="PersonId" name="PersonId" />
+                                        <div class="row">
+                                            <div class="mb-3 col-4">
+                                                <label for="PostalCode" class="form-label">CEP</label>
+                                                <input type="text" class="form-control cep" value="@Model.AddressViewModel.PostalCode" id="PostalCode" name="PostalCode" required>
+                                            </div>
+                                            <div class="mb-3 col-8">
+                                                <label for="Address" class="form-label">Endereço</label>
+                                                <input type="text" value="@Model.AddressViewModel.Address" class="form-control" id="Address" name="Address" required>
+                                            </div>
+
+                                            <div class="mb-3 col-6">
+                                                <label for="City" class="form-label">Cidade</label>
+                                                <input type="text" value="@Model.AddressViewModel.City" class="form-control" id="City" name="City" required>
+                                            </div>
+                                            <div class="mb-3 col-6">
+                                                <label for="State" class="form-label">Estado</label>
+                                                <input type="text" value="@Model.AddressViewModel.State" class="form-control" id="State" name="State" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-success d-flex align-items-center mt-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @@fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" /></svg>
+                                                <span class="ms-1">Atualizar</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-6">
+                            <div role="alert" class="fade bg-danger text-white alert alert-dismissible show validation-container">
+                                <p> Ocorreu um erro ao processar sua solicitação. Tente novamente mais tarde.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,159 @@
+﻿@model Gerenciamento.Models.DataAddressViewModel
+@{
+    ViewData["Title"] = "Editar Cadastro";
+}
+<div class="row">
+    <div class="col-12 my-3">
+        <h4>Listagem Endereço</h4>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="text-center card h-100">
+                    <div class="card-body d-flex align-items-center justify-content-center flex-column py-4">
+                        <h4>Olá, @Model.Name</h4>
+                        <ul class="mt-3 list-group list-group-flush w-100 text-start" id="list-sidebar">
+                            <li class="list-group-item rounded mb-2 border-0 active">
+                                <p class="mb-0">
+                                    <a class="text-decoration-none text-dark  d-block" href="/Home/Dados/@Model.PersonId">Meus Endereços</a>
+                                </p>
+                            </li>
+                            <li class="list-group-item rounded mb-2 border-0">
+                                <p class="mb-0">
+                                    <a class="text-decoration-none text-dark d-block" href="/Person/Index/@Model.PersonId">Atualizar Dados</a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8">
+                <div class="text-center card">
+                    <div class="card-body">
+                        <div class="row" id="listagem-endereco-container">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button class="btn btn-success d-flex align-items-center" data-bs-toggle="modal"
+                                        data-bs-target="#registrarEnderecoModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+                                    </svg>
+                                    <span class="ms-1">Endereço</span>
+                                </button>
+                            </div>
+                            @if (Model.AddressViewModel != null && Model.AddressViewModel.Count > 0)
+                            {
+                                <div class="table-responsive my-4">
+                                    <table class="mb-0 table">
+                                        <thead>
+                                            <tr>
+                                                <th>CEP</th>
+                                                <th>Endereço</th>
+                                                <th>Cidade</th>
+                                                <th>Estado</th>
+                                                <th>Excluir</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var row in Model.AddressViewModel)
+                                            {
+                                                <tr>
+                                                    <td class="cep">@row.PostalCode</td>
+                                                    <td><a href="/Address/Index/@row.Id?uid=@Model.PersonId">@row.Address</a></td>
+                                                    <td>@row.City</td>
+                                                    <td>@row.State</td>
+                                                    <td>
+                                                        <button type="button" onclick="deleteAddress(@row.Id)"
+                                                   class="btn btn-outline-danger btn-sm">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor"
+                                                         viewBox="0 0 384 512">
+                                                                <!--!Font Awesome Free 6.5.2 by @@fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-12 py-5">
+                                    <p>Nenhum registro encontrado.</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="registrarEnderecoModal" tabindex="-1" aria-labelledby="registrarEnderecoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="Dados" method="post">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="registrarEnderecoModalLabel">Registrar Endereço</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 d-none" id="validation-container-parent">
+                            <div class="row justify-content-center">
+                                <div class="col-4">
+                                    <div role="alert" class="fade bg-danger text-white alert alert-dismissible show" id="validation-container">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-white" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="text" hidden value="@Model.PersonId" id="PersonId" name="PersonId" />
+                        <div class="mb-3 col-6">
+                            <label for="PostalCode" class="form-label">CEP</label>
+                            <input type="text" class="form-control cep" id="PostalCode" name="PostalCode" required>
+                        </div>
+                        <div class="mb-3 col-12">
+                            <label for="Address" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" id="Address" name="Address" required>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label for="City" class="form-label">Cidade</label>
+                            <input type="text" class="form-control" id="City" name="City" required>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label for="State" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="State" name="State" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger d-flex align-items-center mt-3" data-bs-dismiss="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             viewBox="0 0 384 512">
+                            <!--!Font Awesome Free 6.5.2 by @@fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                        </svg>
+                        <span>Fechar</span>
+                    </button>
+                    <button type="submit" class="btn btn-success d-flex align-items-center mt-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             viewBox="0 0 448 512">
+                            <!--!Font Awesome Free 6.5.2 by @@fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
+                        </svg>
+                        <span class="ms-1">Registrar</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
